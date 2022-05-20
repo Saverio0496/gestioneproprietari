@@ -102,8 +102,8 @@ public class AutomobileServiceImpl implements AutomobileService {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {
-			abitanteDAO.setEntityManager(entityManager);
-			return abitanteDAO.findAllByCodiceMunicipioIniziaCon(codice);
+			automobileDAO.setEntityManager(entityManager);
+			return automobileDAO.findAllByCodiceFiscaleIniziaCon(inizialeInput);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

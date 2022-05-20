@@ -49,7 +49,7 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 
 	public List<Automobile> findAllByCodiceFiscaleIniziaCon(String inizialeInput) throws Exception {
 		TypedQuery<Automobile> query = entityManager
-				.createQuery("from Automobile a where a.proprietario.codicefiscale like ?1", Automobile.class);
+				.createQuery("from Automobile a where a.proprietario.codiceFiscale like ?1", Automobile.class);
 		return query.setParameter(1, inizialeInput + "%").getResultList();
 	}
 
