@@ -46,6 +46,8 @@ public class TestProprietarioAutomobile {
 
 			testInserisciAutomobile(automobileService);
 
+			testRimuoviAutomobile(automobileService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -88,7 +90,7 @@ public class TestProprietarioAutomobile {
 		List<Proprietario> elencoProprietariPresenti = proprietarioService.listAllProprietari();
 		if (elencoProprietariPresenti.isEmpty())
 			throw new RuntimeException("testRimuoviProprietario fallito: non ci sono proprietari a cui collegarci!");
-		proprietarioService.rimuovi(12L);
+		proprietarioService.rimuovi(15L);
 		System.out.println("Fine testRimuoviProprietario!");
 
 	}
@@ -132,6 +134,15 @@ public class TestProprietarioAutomobile {
 		if (nuovoAutomobile.getId() == null)
 			throw new RuntimeException("testInserisciAutomobile fallito!");
 		System.out.println("Fine testInserisciAutomobile!");
+	}
+
+	public static void testRimuoviAutomobile(AutomobileService automobileService) throws Exception {
+		System.out.println("Inizio testRimuoviAutomobile");
+		List<Automobile> elencoAutomobiliPresenti = automobileService.listAllAutomobili();
+		if (elencoAutomobiliPresenti.isEmpty())
+			throw new RuntimeException("testRimuoviAutomobile fallito: non ci sono proprietari a cui collegarci!");
+		automobileService.rimuovi(4L);
+		System.out.println("Fine testRimuoviAutomobile!");
 	}
 
 }

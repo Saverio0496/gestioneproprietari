@@ -81,11 +81,35 @@ public class AutomobileServiceImpl implements AutomobileService {
 	}
 
 	public void rimuovi(Long idAutomobileInstance) throws Exception {
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			entityManager.getTransaction().begin();
+			automobileDAO.setEntityManager(entityManager);
+			automobileDAO.delete(automobileDAO.get(idAutomobileInstance));
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	public List<Automobile> cercaTutteLeAutomobiliCheHannoProprietarioConCodiceFiscaleCheIniziaCon(String inizialeInput)
 			throws Exception {
-		return null;
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			abitanteDAO.setEntityManager(entityManager);
+			return abitanteDAO.findAllByCodiceMunicipioIniziaCon(codice);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	public List<Automobile> automobiliConErrori() throws Exception {
