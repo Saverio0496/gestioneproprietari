@@ -33,6 +33,10 @@ public class TestProprietarioAutomobile {
 			System.out.println("In tabella Proprietario ci sono " + proprietarioService.listAllProprietari().size()
 					+ " elementi.");
 
+			testRimuoviProprietario(proprietarioService);
+			System.out.println("In tabella Proprietario ci sono " + proprietarioService.listAllProprietari().size()
+					+ " elementi.");
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -51,7 +55,7 @@ public class TestProprietarioAutomobile {
 		System.out.println("Inizio testAggiornaProprietario");
 		List<Proprietario> elencoProprietariPresenti = proprietarioService.listAllProprietari();
 		if (elencoProprietariPresenti.isEmpty())
-			throw new RuntimeException("testAggiornaProprietario fallito: non ci sono proprietari a cui collegarci ");
+			throw new RuntimeException("testAggiornaProprietario fallito: non ci sono proprietari a cui collegarci!");
 		Proprietario proprietarioDaAggiornare = elencoProprietariPresenti.get(0);
 		proprietarioDaAggiornare.setNome("Saverio");
 		System.out.println(proprietarioDaAggiornare);
@@ -68,6 +72,16 @@ public class TestProprietarioAutomobile {
 		if (nuovoProprietario.getId() == null)
 			throw new RuntimeException("testInserisciProprietario fallito!");
 		System.out.println("Fine testInserisciProprietario!");
+	}
+
+	public static void testRimuoviProprietario(ProprietarioService proprietarioService) throws Exception {
+		System.out.println("Inizio testRimuoviProprietario");
+		List<Proprietario> elencoProprietariPresenti = proprietarioService.listAllProprietari();
+		if (elencoProprietariPresenti.isEmpty())
+			throw new RuntimeException("testRimuoviProprietario fallito: non ci sono proprietari a cui collegarci!");
+		proprietarioService.rimuovi(3L);
+		System.out.println("Fine testRimuoviProprietario!");
+
 	}
 
 }
