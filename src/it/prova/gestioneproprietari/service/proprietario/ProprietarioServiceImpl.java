@@ -33,8 +33,19 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		}
 	}
 
-	public Proprietario caricaSingoloAbitante(Long id) throws Exception {
-		return null;
+	public Proprietario caricaSingoloProprietario(Long id) throws Exception {
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			proprietarioDAO.setEntityManager(entityManager);
+			return proprietarioDAO.get(id);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	public void aggiorna(Proprietario proprietarioInstance) throws Exception {

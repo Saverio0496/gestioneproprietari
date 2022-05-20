@@ -20,7 +20,7 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 	}
 
 	public Proprietario get(Long id) throws Exception {
-		return null;
+		return entityManager.find(Proprietario.class, id);
 	}
 
 	public void update(Proprietario o) throws Exception {
