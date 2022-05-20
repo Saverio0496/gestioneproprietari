@@ -37,6 +37,8 @@ public class TestProprietarioAutomobile {
 			System.out.println("In tabella Proprietario ci sono " + proprietarioService.listAllProprietari().size()
 					+ " elementi.");
 
+			testcontaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl(proprietarioService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -79,8 +81,20 @@ public class TestProprietarioAutomobile {
 		List<Proprietario> elencoProprietariPresenti = proprietarioService.listAllProprietari();
 		if (elencoProprietariPresenti.isEmpty())
 			throw new RuntimeException("testRimuoviProprietario fallito: non ci sono proprietari a cui collegarci!");
-		proprietarioService.rimuovi(3L);
+		proprietarioService.rimuovi(8L);
 		System.out.println("Fine testRimuoviProprietario!");
+
+	}
+
+	public static void testcontaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl(
+			ProprietarioService proprietarioService) throws Exception {
+		System.out.println("Inizio testContaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl");
+		List<Proprietario> elencoProprietariPresenti = proprietarioService.listAllProprietari();
+		if (elencoProprietariPresenti.isEmpty())
+			throw new RuntimeException(
+					"testContaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl fallito: non ci sono proprietari a cui collegarci!");
+		System.out.println(proprietarioService.contaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl(2018));
+		System.out.println("Fine testContaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl!");
 
 	}
 

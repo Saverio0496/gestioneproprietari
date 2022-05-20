@@ -104,8 +104,20 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 	}
 
 	@Override
-	public int contaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl(int annoInput) throws Exception {
-		return 0;
+	public Long contaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl(int annoInput) throws Exception {
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			proprietarioDAO.setEntityManager(entityManager);
+
+			return proprietarioDAO.countHowManyProprietariPossiedonoAutomobiliImmatricolateDopoIl(annoInput);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 }

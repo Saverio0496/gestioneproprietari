@@ -5,6 +5,6 @@ import it.prova.gestioneproprietari.model.Proprietario;
 
 public interface ProprietarioDAO extends IBaseDAO<Proprietario> {
 
-	public int countHowManyProprietariPossiedonoAutomobiliImmatricolateDopoIl(int annoInput) throws Exception;
+	public Long countHowManyProprietariPossiedonoAutomobiliImmatricolateDopoIl(int annoInput) throws Exception;
 
 }
