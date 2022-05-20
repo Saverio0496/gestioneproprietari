@@ -54,7 +54,10 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 	}
 
 	public List<Automobile> findAllAutomobiliConErrori() throws Exception {
-		return null;
+		TypedQuery<Automobile> query = entityManager.createQuery(
+				"select distinct a from Automobile a join a.proprietario p where p.dataNascita > '2004-05-20'",
+				Automobile.class);
+		return query.getResultList();
 	}
 
 }

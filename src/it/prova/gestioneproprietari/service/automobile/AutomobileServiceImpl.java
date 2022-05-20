@@ -113,7 +113,17 @@ public class AutomobileServiceImpl implements AutomobileService {
 	}
 
 	public List<Automobile> automobiliConErrori() throws Exception {
-		return null;
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			automobileDAO.setEntityManager(entityManager);
+			return automobileDAO.findAllAutomobiliConErrori();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 }

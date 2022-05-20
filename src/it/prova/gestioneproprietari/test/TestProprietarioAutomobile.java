@@ -51,6 +51,8 @@ public class TestProprietarioAutomobile {
 			testCercaTutteLeAutomobiliCheHannoProprietarioConCodiceFiscaleCheIniziaCon(automobileService,
 					proprietarioService);
 
+			testAutomobiliConErrori(automobileService, proprietarioService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -93,7 +95,7 @@ public class TestProprietarioAutomobile {
 		List<Proprietario> elencoProprietariPresenti = proprietarioService.listAllProprietari();
 		if (elencoProprietariPresenti.isEmpty())
 			throw new RuntimeException("testRimuoviProprietario fallito: non ci sono proprietari a cui collegarci!");
-		proprietarioService.rimuovi(19L);
+		proprietarioService.rimuovi(22L);
 		System.out.println("Fine testRimuoviProprietario!");
 
 	}
@@ -144,7 +146,7 @@ public class TestProprietarioAutomobile {
 		List<Automobile> elencoAutomobiliPresenti = automobileService.listAllAutomobili();
 		if (elencoAutomobiliPresenti.isEmpty())
 			throw new RuntimeException("testRimuoviAutomobile fallito: non ci sono proprietari a cui collegarci!");
-		automobileService.rimuovi(9L);
+		automobileService.rimuovi(13L);
 		System.out.println("Fine testRimuoviAutomobile!");
 	}
 
@@ -155,8 +157,19 @@ public class TestProprietarioAutomobile {
 		if (listaProprietariPresenti.isEmpty())
 			throw new RuntimeException(
 					"testCercaTutteLeAutomobiliCheHannoProprietarioConCodiceFiscaleCheIniziaCon fallito: non ci sono proprietari a cui collegarci ");
-		System.out.println(abitanteService.cercaTutteLeAutomobiliCheHannoProprietarioConCodiceFiscaleCheIniziaCon("CR"));
+		System.out
+				.println(abitanteService.cercaTutteLeAutomobiliCheHannoProprietarioConCodiceFiscaleCheIniziaCon("CR"));
 		System.out.println("Fine testCercaTutteLeAutomobiliCheHannoProprietarioConCodiceFiscaleCheIniziaCon!");
+	}
+
+	private static void testAutomobiliConErrori(AutomobileService abitanteService,
+			ProprietarioService proprietarioService) throws Exception {
+		System.out.println("Inizio testCercaTutteLeAutomobiliCheHannoProprietarioConCodiceFiscaleCheIniziaCon");
+		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
+		if (listaProprietariPresenti.isEmpty())
+			throw new RuntimeException("testAutomobiliConErrori fallito: non ci sono proprietari a cui collegarci ");
+		System.out.println(abitanteService.automobiliConErrori());
+		System.out.println("Fine testAutomobiliConErrori!");
 	}
 
 }
