@@ -19,19 +19,28 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 		return entityManager.createQuery("from Proprietario", Proprietario.class).getResultList();
 	}
 
+	@Override
 	public Proprietario get(Long id) throws Exception {
 		return entityManager.find(Proprietario.class, id);
 	}
 
+	@Override
 	public void update(Proprietario o) throws Exception {
+		if (o == null) {
+			throw new Exception("Problema valore in input");
+		}
+		o = entityManager.merge(o);
 	}
 
+	@Override
 	public void insert(Proprietario o) throws Exception {
 	}
 
+	@Override
 	public void delete(Proprietario o) throws Exception {
 	}
 
+	@Override
 	public int countHowManyProprietariPossiedonoAutomobiliImmatricolateDopoIl(int annoInput) throws Exception {
 		return 0;
 	}

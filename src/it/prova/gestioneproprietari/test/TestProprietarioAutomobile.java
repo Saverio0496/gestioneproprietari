@@ -27,6 +27,8 @@ public class TestProprietarioAutomobile {
 
 			testCaricaSingoloProprietario(proprietarioService);
 
+			testAggiornaProprietario(proprietarioService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -36,9 +38,20 @@ public class TestProprietarioAutomobile {
 
 	private static void testCaricaSingoloProprietario(ProprietarioService proprietarioService) throws Exception {
 		System.out.println("Inizio testCaricaSingoloProprietario");
-		Proprietario ProprietarioDaRicercare = proprietarioService.caricaSingoloProprietario(1L);
-		System.out.println(ProprietarioDaRicercare);
+		Proprietario proprietarioDaRicercare = proprietarioService.caricaSingoloProprietario(1L);
+		System.out.println(proprietarioDaRicercare);
 		System.out.println("Fine testCaricaSingoloProprietario");
+	}
+
+	private static void testAggiornaProprietario(ProprietarioService proprietarioService) throws Exception {
+		System.out.println("Inizio testAggiornaProprietario");
+		List<Proprietario> elencoProprietariPresenti = proprietarioService.listAllProprietari();
+		if (elencoProprietariPresenti.isEmpty())
+			throw new RuntimeException("testAggiornaProprietario fallito: non ci sono proprietari a cui collegarci ");
+		Proprietario proprietarioDaAggiornare = elencoProprietariPresenti.get(0);
+		proprietarioDaAggiornare.setNome("Saverio");
+		System.out.println(proprietarioDaAggiornare);
+		System.out.println("Fine testAggiornareProprietario");
 	}
 
 }

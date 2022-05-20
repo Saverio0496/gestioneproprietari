@@ -33,6 +33,7 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		}
 	}
 
+	@Override
 	public Proprietario caricaSingoloProprietario(Long id) throws Exception {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
@@ -48,15 +49,33 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		}
 	}
 
+	@Override
 	public void aggiorna(Proprietario proprietarioInstance) throws Exception {
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			entityManager.getTransaction().begin();
+			proprietarioDAO.setEntityManager(entityManager);
+			proprietarioDAO.update(proprietarioInstance);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
+	@Override
 	public void inserisciNuovo(Proprietario proprietarioInstance) throws Exception {
 	}
 
+	@Override
 	public void rimuovi(Long idProprietarioInstance) throws Exception {
 	}
 
+	@Override
 	public int contaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl(int annoInput) throws Exception {
 		return 0;
 	}
