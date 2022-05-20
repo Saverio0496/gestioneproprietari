@@ -44,6 +44,8 @@ public class TestProprietarioAutomobile {
 
 			testAggiornaAutomobile(automobileService);
 
+			testInserisciAutomobile(automobileService);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -86,7 +88,7 @@ public class TestProprietarioAutomobile {
 		List<Proprietario> elencoProprietariPresenti = proprietarioService.listAllProprietari();
 		if (elencoProprietariPresenti.isEmpty())
 			throw new RuntimeException("testRimuoviProprietario fallito: non ci sono proprietari a cui collegarci!");
-		proprietarioService.rimuovi(10L);
+		proprietarioService.rimuovi(12L);
 		System.out.println("Fine testRimuoviProprietario!");
 
 	}
@@ -111,14 +113,25 @@ public class TestProprietarioAutomobile {
 	}
 
 	private static void testAggiornaAutomobile(AutomobileService automobileService) throws Exception {
-		System.out.println("Inizio testAggiornaProprietario");
+		System.out.println("Inizio testAggiornaAutomobile");
 		List<Automobile> elencoAutomobiliPresenti = automobileService.listAllAutomobili();
 		if (elencoAutomobiliPresenti.isEmpty())
-			throw new RuntimeException("testAggiornaProprietario fallito: non ci sono proprietari a cui collegarci!");
+			throw new RuntimeException("testAggiornaAutomobile fallito: non ci sono proprietari a cui collegarci!");
 		Automobile automobileDaAggiornare = elencoAutomobiliPresenti.get(0);
 		automobileDaAggiornare.setMarca("Lamborghini");
 		System.out.println(automobileDaAggiornare);
-		System.out.println("Fine testAggiornareProprietario");
+		System.out.println("Fine testAggiornareAutomobile!");
+	}
+
+	public static void testInserisciAutomobile(AutomobileService automobileService) throws Exception {
+		System.out.println("Inizio testInserisciAutomobile");
+		Automobile nuovoAutomobile = new Automobile("Fiat", "Punto", "RH609LH", 2010);
+		if (nuovoAutomobile.getId() != null)
+			throw new RuntimeException("testInserisciAutomobile fallito: record già presente!");
+		automobileService.inserisciNuovo(nuovoAutomobile);
+		if (nuovoAutomobile.getId() == null)
+			throw new RuntimeException("testInserisciAutomobile fallito!");
+		System.out.println("Fine testInserisciAutomobile!");
 	}
 
 }

@@ -31,6 +31,11 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 	}
 
 	public void insert(Automobile automobileInstance) throws Exception {
+		if (automobileInstance == null) {
+			throw new Exception("Problema valore in input");
+		}
+
+		entityManager.persist(automobileInstance);
 	}
 
 	public void delete(Automobile automobileInstance) throws Exception {
