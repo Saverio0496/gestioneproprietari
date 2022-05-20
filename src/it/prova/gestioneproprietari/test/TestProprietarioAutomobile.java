@@ -29,6 +29,10 @@ public class TestProprietarioAutomobile {
 
 			testAggiornaProprietario(proprietarioService);
 
+			testInserisciProprietario(proprietarioService);
+			System.out.println("In tabella Proprietario ci sono " + proprietarioService.listAllProprietari().size()
+					+ " elementi.");
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
@@ -52,6 +56,18 @@ public class TestProprietarioAutomobile {
 		proprietarioDaAggiornare.setNome("Saverio");
 		System.out.println(proprietarioDaAggiornare);
 		System.out.println("Fine testAggiornareProprietario");
+	}
+
+	public static void testInserisciProprietario(ProprietarioService proprietarioService) throws Exception {
+		System.out.println("Inizio testInserisciProprietario");
+		Date dataPerTest = new SimpleDateFormat("dd-MM-yyyy").parse("04-05-1996");
+		Proprietario nuovoProprietario = new Proprietario("Saverio", "Carelli", "CRLSVR96E04A323C", dataPerTest);
+		if (nuovoProprietario.getId() != null)
+			throw new RuntimeException("testInserisciProprietario fallito: record già presente!");
+		proprietarioService.inserisciNuovo(nuovoProprietario);
+		if (nuovoProprietario.getId() == null)
+			throw new RuntimeException("testInserisciProprietario fallito!");
+		System.out.println("Fine testInserisciProprietario!");
 	}
 
 }
