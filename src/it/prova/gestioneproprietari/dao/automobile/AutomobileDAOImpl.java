@@ -19,16 +19,21 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 	}
 
 	public Automobile get(Long id) throws Exception {
-		return null;
+		return entityManager.find(Automobile.class, id);
 	}
 
-	public void update(Automobile o) throws Exception {
+	public void update(Automobile automobileInstance) throws Exception {
+		if (automobileInstance == null) {
+			throw new Exception("Problema valore in input");
+		}
+
+		automobileInstance = entityManager.merge(automobileInstance);
 	}
 
-	public void insert(Automobile o) throws Exception {
+	public void insert(Automobile automobileInstance) throws Exception {
 	}
 
-	public void delete(Automobile o) throws Exception {
+	public void delete(Automobile automobileInstance) throws Exception {
 	}
 
 	public List<Automobile> findAllByCodiceFiscaleIniziaCon(String inizialeInput) throws Exception {

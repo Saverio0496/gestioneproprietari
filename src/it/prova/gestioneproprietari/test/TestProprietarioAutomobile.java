@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import it.prova.gestioneproprietari.dao.EntityManagerUtil;
+import it.prova.gestioneproprietari.model.Automobile;
 import it.prova.gestioneproprietari.model.Proprietario;
 import it.prova.gestioneproprietari.service.MyServiceFactory;
 import it.prova.gestioneproprietari.service.automobile.AutomobileService;
@@ -38,6 +39,10 @@ public class TestProprietarioAutomobile {
 					+ " elementi.");
 
 			testcontaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl(proprietarioService);
+
+			testCaricaSingoloAutomobile(automobileService);
+
+			testAggiornaAutomobile(automobileService);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -81,7 +86,7 @@ public class TestProprietarioAutomobile {
 		List<Proprietario> elencoProprietariPresenti = proprietarioService.listAllProprietari();
 		if (elencoProprietariPresenti.isEmpty())
 			throw new RuntimeException("testRimuoviProprietario fallito: non ci sono proprietari a cui collegarci!");
-		proprietarioService.rimuovi(8L);
+		proprietarioService.rimuovi(10L);
 		System.out.println("Fine testRimuoviProprietario!");
 
 	}
@@ -96,6 +101,24 @@ public class TestProprietarioAutomobile {
 		System.out.println(proprietarioService.contaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl(2018));
 		System.out.println("Fine testContaQuantiProprietariPossiedonoAutomobiliImmatricolateDopoIl!");
 
+	}
+
+	private static void testCaricaSingoloAutomobile(AutomobileService automobileService) throws Exception {
+		System.out.println("Inizio testCaricaSingoloProprietario");
+		Automobile automobileDaRicercare = automobileService.caricaSingoloAutomobile(3L);
+		System.out.println(automobileDaRicercare);
+		System.out.println("Fine testCaricaSingoloProprietario");
+	}
+
+	private static void testAggiornaAutomobile(AutomobileService automobileService) throws Exception {
+		System.out.println("Inizio testAggiornaProprietario");
+		List<Automobile> elencoAutomobiliPresenti = automobileService.listAllAutomobili();
+		if (elencoAutomobiliPresenti.isEmpty())
+			throw new RuntimeException("testAggiornaProprietario fallito: non ci sono proprietari a cui collegarci!");
+		Automobile automobileDaAggiornare = elencoAutomobiliPresenti.get(0);
+		automobileDaAggiornare.setMarca("Lamborghini");
+		System.out.println(automobileDaAggiornare);
+		System.out.println("Fine testAggiornareProprietario");
 	}
 
 }
